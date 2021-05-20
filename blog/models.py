@@ -7,6 +7,15 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
-# class Images(models.Model):
-#     note = models.ForeignKey(Post,on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to=user_directory_path,null=True,blank=True)
+    def __str__(self):
+        return self.title
+
+
+class Image(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/')
+    image_name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return f'{self.image_name} for the post {self.post}'
+
