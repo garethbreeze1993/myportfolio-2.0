@@ -11,3 +11,13 @@ class IndexView(ListView):
     def get_queryset(self):
         return Post.objects.order_by('-last_modified')
 
+'''
+DEtail View
+Grab post
+Do post.images to get images for post order by priority 1 at start
+I think separate collection then loop through and place image
+{% for image in image_list %}
+{{image.url}}
+Probably function view
+'''
+
