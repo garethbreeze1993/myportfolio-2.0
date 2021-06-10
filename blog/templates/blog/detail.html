@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    {{ post_obj.title }}
+
+    {{ post_obj.text }}
+
+    {{ post_obj.last_modified }}
+
+
+    <br/>
+
+    {% for image in images %}
+          <img src="{{ image.image.url }}" class="card-img-top" alt="...">
+
+    {% endfor %}
+
+{% endblock %}

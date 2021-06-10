@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from .models import Post, Image
 
@@ -11,13 +11,14 @@ class IndexView(ListView):
     def get_queryset(self):
         return Post.objects.order_by('-last_modified')
 
-'''
-DEtail View
-Grab post
-Do post.images to get images for post order by priority 1 at start
-I think separate collection then loop through and place image
-{% for image in image_list %}
-{{image.url}}
-Probably function view
-'''
 
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    images = post.images.all()
+    return render(request, 'blog/detail.html', context={'post_obj': post, 'images': images})
+
+'''
+Pagination
+
+https://docs.djangoproject.com/en/3.2/topics/pagination/
+'''
