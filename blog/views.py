@@ -6,6 +6,7 @@ from .models import Post, Image
 class IndexView(ListView):
     template_name = 'blog/home.html'
     context_object_name = 'post_list'
+    paginate_by = 6
     model = Post
 
     def get_queryset(self):

@@ -11,6 +11,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def snippet(self):
+        return self.text[:100] + '...'
+
 
 class Image(models.Model):
     post = models.ForeignKey(Post, related_name='images', on_delete=models.CASCADE)
