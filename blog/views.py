@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -6,7 +7,6 @@ from django.views.generic import ListView
 from .models import Post, Image
 from blog.forms import ContactForm
 from myportfolio.settings import DEFAULT_FROM_EMAIL
-
 
 
 class IndexView(ListView):
@@ -38,15 +38,16 @@ def contact_view(request):
                 send_mail(subject, message, from_email, ['default@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            # TODO Implement flash messages
+            messages.info(request, "Success! Thank you for your message.")
             return redirect('home')
     return render(request, "blog/email.html", {'form': form})
-
-
-def success_view(request):
-    return HttpResponse('Success! Thank you for your message.')
-
 
 '''
 https://learndjango.com/tutorials/django-email-contact-form
 '''
+
+#TODO Blog Detail Page
+#TODO Attach CV and have some sort of download view so user can download it
+#TODO Make email form look better
+
+
